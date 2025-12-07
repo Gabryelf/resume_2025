@@ -1,0 +1,1031 @@
+<!DOCTYPE html>
+<html lang="ru" data-bs-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Резюме - Валеев С.В. | Python Разработчик | Преподаватель IT</title>
+    
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    
+    <!-- AOS Animation -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <!-- Custom CSS -->
+    <style>
+        :root {
+            --gradient-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --gradient-secondary: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            --gradient-dark: linear-gradient(135deg, #141E30 0%, #243B55 100%);
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            line-height: 1.6;
+            background-color: var(--bs-body-bg);
+            color: var(--bs-body-color);
+            transition: all 0.3s ease;
+        }
+
+        /* Print styles */
+        @media print {
+            body {
+                font-size: 12pt;
+                line-height: 1.4;
+            }
+            
+            .container-lg {
+                max-width: 100% !important;
+                padding: 0 !important;
+            }
+            
+            .card {
+                border: 1px solid #dee2e6 !important;
+                box-shadow: none !important;
+                break-inside: avoid;
+            }
+            
+            .theme-toggle,
+            .btn,
+            .photo-gallery-section,
+            .jump-to-photos {
+                display: none !important;
+            }
+            
+            a[href]:after {
+                content: " (" attr(href) ")";
+                font-size: 0.9em;
+                font-weight: normal;
+            }
+        }
+
+        /* Gradient text */
+        .gradient-text {
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: inline-block;
+        }
+
+        /* Avatar styling */
+        .avatar-container {
+            position: relative;
+            width: 150px;
+            height: 150px;
+            margin: 0 auto;
+        }
+
+        .avatar-placeholder {
+            width: 100%;
+            height: 100%;
+            background: var(--gradient-primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            border: 4px solid white;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        /* Skill badges */
+        .skill-badge {
+            display: inline-block;
+            padding: 0.3rem 0.8rem;
+            background: var(--bs-primary-bg-subtle);
+            color: var(--bs-primary);
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            margin: 0.1rem;
+            transition: all 0.3s ease;
+        }
+
+        .skill-badge:hover {
+            transform: translateY(-2px);
+            background: var(--bs-primary);
+            color: white;
+        }
+
+        /* Timeline */
+        .timeline {
+            position: relative;
+            padding-left: 2rem;
+        }
+
+        .timeline:before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: var(--gradient-primary);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 2rem;
+        }
+
+        .timeline-item:before {
+            content: '';
+            position: absolute;
+            left: -2.5rem;
+            top: 0.3rem;
+            width: 1rem;
+            height: 1rem;
+            border-radius: 50%;
+            background: var(--bs-primary);
+            border: 3px solid white;
+            box-shadow: 0 0 0 3px var(--bs-primary-bg-subtle);
+        }
+
+        .timeline-date {
+            font-size: 0.85rem;
+            color: var(--bs-secondary);
+            font-weight: 600;
+            margin-bottom: 0.3rem;
+        }
+
+        /* Progress bars custom */
+        .progress {
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            border-radius: 10px;
+        }
+
+        /* Card hover effects */
+        .card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: none;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1) !important;
+        }
+
+        /* Section titles */
+        .card-title {
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+
+        .card-title:after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 40px;
+            height: 3px;
+            background: var(--gradient-primary);
+            border-radius: 2px;
+        }
+
+        /* Theme toggle button */
+        .theme-toggle button {
+            width: 50px;
+            height: 50px;
+            z-index: 1000;
+        }
+
+        /* Dark theme adjustments */
+        [data-bs-theme="dark"] .card {
+            background-color: var(--bs-dark-bg-subtle);
+            border-color: var(--bs-border-color);
+        }
+        
+        [data-bs-theme="dark"] .skill-badge {
+            background: rgba(var(--bs-primary-rgb), 0.2);
+        }
+        
+        [data-bs-theme="dark"] .avatar-placeholder {
+            border-color: var(--bs-dark-bg-subtle);
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .display-4 {
+                font-size: 2.5rem;
+            }
+            
+            .avatar-container {
+                width: 120px;
+                height: 120px;
+            }
+            
+            .timeline {
+                padding-left: 1.5rem;
+            }
+            
+            .timeline-item:before {
+                left: -1.8rem;
+            }
+        }
+
+        /* Education item styling */
+        .education-item {
+            position: relative;
+            padding-left: 1.5rem;
+        }
+
+        .education-item:before {
+            content: '•';
+            position: absolute;
+            left: 0;
+            color: var(--bs-primary);
+            font-size: 1.5rem;
+            line-height: 1;
+        }
+
+        /* Soft skills progress */
+        .soft-skill-item {
+            transition: transform 0.3s ease;
+        }
+
+        .soft-skill-item:hover {
+            transform: translateX(5px);
+        }
+
+        /* Photo Gallery */
+        .photo-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .photo-frame {
+            border: 2px solid var(--bs-border-color);
+            border-radius: 10px;
+            padding: 15px;
+            background: var(--bs-body-bg);
+            transition: all 0.3s ease;
+            height: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .photo-frame:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            border-color: var(--bs-primary);
+        }
+
+        .photo-placeholder {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, #f5f7fa, #c3cfe2);
+            border-radius: 5px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: #6c757d;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .photo-placeholder i {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            opacity: 0.7;
+        }
+
+        .photo-caption {
+            margin-top: 10px;
+            font-size: 0.9rem;
+            color: var(--bs-secondary);
+            font-weight: 500;
+        }
+
+        /* Back to top button */
+        .jump-to-photos {
+            position: fixed;
+            left: 20px;
+            bottom: 20px;
+            z-index: 1000;
+        }
+
+        /* Certificate buttons */
+        .certificate-badge {
+            margin: 2px;
+        }
+
+        /* Smooth scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
+</head>
+<body>
+    <!-- Jump to Photos Button -->
+    <div class="jump-to-photos">
+        <a href="#photo-gallery" class="btn btn-success btn-sm rounded-pill shadow">
+            <i class="bi bi-images me-1"></i>Фото галерея
+        </a>
+    </div>
+
+    <!-- Theme Toggle -->
+    <div class="theme-toggle position-fixed end-0 bottom-0 m-4">
+        <button class="btn btn-outline-primary btn-sm rounded-circle shadow" id="themeToggle" title="Сменить тему">
+            <i class="bi bi-moon"></i>
+        </button>
+    </div>
+
+    <!-- Main Container -->
+    <div class="container-lg my-5">
+        <!-- Header Section -->
+        <header class="row align-items-center mb-5" data-aos="fade-up">
+            <div class="col-md-3 text-center mb-4 mb-md-0">
+                <div class="avatar-container">
+                    <div class="avatar-placeholder">
+                        
+                        <img src="./assets/favicon/icon.jpg" alt="avatar-foto" width="250" height="300">
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-9">
+                <h1 class="display-4 fw-bold gradient-text mb-3">Валеев С.В.</h1>
+                <p class="lead text-muted mb-2">
+                    <i class="bi bi-code-slash me-2"></i>Преподаватель IT-специальностей | Python Разработчик
+                </p>
+                <p class="mb-4">
+                    <i class="bi bi-geo-alt me-2"></i>Крым, Симферополь, Россия
+                </p>
+                
+                <!-- Contact Badges -->
+                <div class="d-flex flex-wrap gap-2 mb-4">
+                    <a href="mailto:gabryelf@yandex.ru" class="btn btn-outline-primary btn-sm">
+                        <i class="bi bi-envelope me-1"></i>gabryelf@yandex.ru
+                    </a>
+                    <a href="tel:+79780860895" class="btn btn-outline-primary btn-sm">
+                        <i class="bi bi-phone me-1"></i>+7 (978) 086-08-95
+                    </a>
+                    <a href="https://github.com/Gabryelf" target="_blank" class="btn btn-outline-dark btn-sm">
+                        <i class="bi bi-github me-1"></i>GitHub
+                    </a>
+                </div>
+                
+                <!-- Action Buttons -->
+                <div class="d-flex flex-wrap gap-2">
+                    <button class="btn btn-primary" onclick="window.print()">
+                        <i class="bi bi-download me-1"></i>Скачать PDF
+                    </button>
+                    <a href="#photo-gallery" class="btn btn-outline-success">
+                        <i class="bi bi-images me-1"></i>Фото проектов
+                    </a>
+                </div>
+            </div>
+        </header>
+
+        <!-- Summary Section -->
+        <section class="card shadow-sm mb-5" data-aos="fade-up" data-aos-delay="100">
+            <div class="card-body">
+                <h2 class="card-title h4 mb-4">
+                    <i class="bi bi-person-badge me-2 text-primary"></i>Обо мне
+                </h2>
+                <div class="row">
+                    <div class="col-lg-8">
+                        <p class="card-text">
+                            Мотивированный специалист IT-специальности с фокусом на backend-разработке на Python. 
+                            Имею опыт создания полноценных веб-приложений с использованием современных технологий.
+                        </p>
+                        <p class="card-text">
+                            Разрабатываю PET-проекты и indie игры на Unity / Construct 3 / Roblox Studio.
+                            Владею языками программирования Java / C# / Python.
+                            Экспериментирую с frontend HTML5 / CSS3 / JS.
+                        </p>
+                    </div>
+                    <div class="col-lg-4">
+                        <ul class="list-unstyled small">
+                            <li><i class="bi bi-check-circle text-success me-2"></i>Разбираюсь в редакторах Gimp/Inkscape/Blender</li>
+                            <li><i class="bi bi-check-circle text-success me-2"></i>Интегрируюсь с платформами GitHub/Render.com</li>
+                            <li><i class="bi bi-check-circle text-success me-2"></i>Публикуюсь на площадках YandexGames/Itch.io</li>
+                            <li><i class="bi bi-check-circle text-success me-2"></i>Имею опыт работы на фрилансе</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="row g-5">
+            <!-- Left Column -->
+            <div class="col-lg-8">
+                <!-- Featured Project - PokeTD -->
+                <section class="card shadow-sm mb-5" data-aos="fade-up" data-aos-delay="200">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-start mb-4">
+                            <div>
+                                <h2 class="card-title h4 mb-2">
+                                    <i class="bi bi-star-fill me-2 text-warning"></i>Ключевой проект
+                                </h2>
+                                <h3 class="h5 mb-3">🎮 PokeTD - Pokémon Tower Defense Game</h3>
+                            </div>
+                            <span class="badge bg-success fs-6">Live Demo</span>
+                        </div>
+                        
+                        <div class="mb-4">
+                            <span class="badge bg-primary me-1 mb-1">Python</span>
+                            <span class="badge bg-primary me-1 mb-1">FastAPI</span>
+                            <span class="badge bg-primary me-1 mb-1">PostgreSQL</span>
+                            <span class="badge bg-primary me-1 mb-1">JavaScript</span>
+                            <span class="badge bg-primary me-1 mb-1">SQLAlchemy</span>
+                            <span class="badge bg-primary me-1 mb-1">Render</span>
+                            <span class="badge bg-primary me-1 mb-1">JWT</span>
+                            <span class="badge bg-primary me-1 mb-1">Docker</span>
+                        </div>
+                        
+                        <p class="card-text mb-4">
+                            Стратегическая Tower Defense игра с бэкендом на FastAPI, реализованная как полноценное веб-приложение 
+                            с аутентификацией, базой данных и автоматическим деплоем.
+                        </p>
+                        
+                        <h6 class="fw-bold mb-3">Достижения:</h6>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <ul class="list-unstyled mb-3 mb-md-0">
+                                    <li class="mb-2">
+                                        <i class="bi bi-check-circle-fill text-success me-2"></i>
+                                        Разработал RESTful API с 15+ эндпоинтами
+                                    </li>
+                                    <li class="mb-2">
+                                        <i class="bi bi-check-circle-fill text-success me-2"></i>
+                                        Реализовал систему JWT-аутентификации
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="col-md-6">
+                                <ul class="list-unstyled">
+                                    <li class="mb-2">
+                                        <i class="bi bi-check-circle-fill text-success me-2"></i>
+                                        Спроектировал базу данных PostgreSQL
+                                    </li>
+                                    <li class="mb-2">
+                                        <i class="bi bi-check-circle-fill text-success me-2"></i>
+                                        Настроил CI/CD пайплайн на Render.com
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-4 pt-3 border-top">
+                            <a href="https://github.com/Gabryelf/PokeTD" target="_blank" class="btn btn-outline-dark me-2">
+                                <i class="bi bi-github me-1"></i>Исходный код
+                            </a>
+                            <a href="https://poketd-1.onrender.com" target="_blank" class="btn btn-success">
+                                <i class="bi bi-play-circle me-1"></i>Live Demo
+                            </a>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Other Projects -->
+                <section class="card shadow-sm mb-5" data-aos="fade-up" data-aos-delay="250">
+                    <div class="card-body">
+                        <h2 class="card-title h4 mb-4">
+                            <i class="bi bi-code-square me-2 text-primary"></i>Другие проекты
+                        </h2>
+                        
+                        <div class="row g-4">
+                            <!-- Project 1 -->
+                            <div class="col-md-6">
+                                <div class="card h-100 border">
+                                    <div class="card-body">
+                                        <h5 class="card-title h6">Game Collections with Unity</h5>
+                                        <div class="mb-3">
+                                            <span class="badge bg-secondary me-1 mb-1">Unity</span>
+                                            <span class="badge bg-secondary me-1 mb-1">2D</span>
+                                            <span class="badge bg-secondary me-1 mb-1">3D</span>
+                                            <span class="badge bg-secondary me-1 mb-1">WebGL</span>
+                                            <span class="badge bg-secondary me-1 mb-1">C#</span>
+                                            <span class="badge bg-secondary me-1 mb-1">Android</span>
+                                            <span class="badge bg-secondary me-1 mb-1">AR-CORE</span>
+                                        </div>
+                                        <p class="card-text small">Коллекция игр web и android формата созданных с помощью движка Unity 2021 / 2022 / 6000</p>
+                                        <a href="https://gabryelf.github.io/My_portfolio_site.io/" target="_blank" class="btn btn-sm btn-outline-primary mt-2">
+                                            <i class="bi bi-link-45deg me-1"></i>Портфолио
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Project 2 -->
+                            <div class="col-md-6">
+                                <div class="card h-100 border">
+                                    <div class="card-body">
+                                        <h5 class="card-title h6">Web Projects Collection</h5>
+                                        <div class="mb-3">
+                                            <span class="badge bg-secondary me-1 mb-1">Java</span>
+                                            <span class="badge bg-secondary me-1 mb-1">C#</span>
+                                            <span class="badge bg-secondary me-1 mb-1">Python</span>
+                                            <span class="badge bg-secondary me-1 mb-1">Spring Boot</span>
+                                            <span class="badge bg-secondary me-1 mb-1">FastAPI</span>
+                                            <span class="badge bg-secondary me-1 mb-1">Flask</span>
+                                        </div>
+                                        <p class="card-text small">Различные проекты - микросервисы и боты для интеграции и обучения</p>
+                                        <a href="https://github.com/Gabryelf?tab=repositories" target="_blank" class="btn btn-sm btn-outline-primary mt-2">
+                                            <i class="bi bi-github me-1"></i>Репозитории
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Experience -->
+                <section class="card shadow-sm mb-5" data-aos="fade-up" data-aos-delay="300">
+                    <div class="card-body">
+                        <h2 class="card-title h4 mb-4">
+                            <i class="bi bi-briefcase me-2 text-primary"></i>Опыт работы
+                        </h2>
+                        
+                        <div class="timeline">
+                            <div class="timeline-item">
+                                <div class="timeline-date">Лето 2024</div>
+                                <div class="timeline-content">
+                                    <h5 class="h6 mb-1">Стажер-разработчик</h5>
+                                    <p class="text-muted small mb-1">Yandex</p>
+                                    <p class="small">Участвовал в обработке и анализе данных для YATGpt-1.5</p>
+                                </div>
+                            </div>
+                            
+                            <div class="timeline-item">
+                                <div class="timeline-date">2023 - н.в.</div>
+                                <div class="timeline-content">
+                                    <h5 class="h6 mb-1">Фриланс проекты</h5>
+                                    <p class="text-muted small mb-1">Удаленная работа</p>
+                                    <p class="small">Разработка небольших веб-приложений и скриптов на Python и C# для клиентов</p>
+                                </div>
+                            </div>
+                            
+                            <div class="timeline-item">
+                                <div class="timeline-date">2022 - 2024</div>
+                                <div class="timeline-content">
+                                    <h5 class="h6 mb-1">Преподаватель IT</h5>
+                                    <p class="text-muted small mb-1">Образовательные центры</p>
+                                    <p class="small">Преподавание программирования, робототехники и веб-разработки</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <!-- Right Column -->
+            <div class="col-lg-4">
+                <!-- Education -->
+                <section class="card shadow-sm mb-5" data-aos="fade-left">
+                    <div class="card-body">
+                        <h2 class="card-title h4 mb-4">
+                            <i class="bi bi-mortarboard me-2 text-primary"></i>Образование
+                        </h2>
+                        
+                        <div class="education-item mb-4">
+                            <h5 class="h6 mb-1">Программист и веб-разработчик на Java</h5>
+                            <p class="text-muted small mb-1">GeekBrains</p>
+                            <p class="small mb-2"><i class="bi bi-calendar me-1"></i>2022 - 2024</p>
+                            <p class="small mb-0">Часов обучения: 720</p>
+                            <p class="small">Специализация: Веб-технологии и базы данных</p>
+                        </div>
+                        
+                        <div class="education-item">
+                            <h5 class="h6 mb-3">Курсы и сертификаты</h5>
+                            <div class="d-flex flex-wrap gap-1 mb-3">
+                                <a href="https://gb.ru/users/9d0df059-e63f-45b2-8f26-c3f24334a594?tab=courses-and-certificates#courses-and-certificates" target="_blank" class="certificate-badge badge bg-info text-dark">
+                                    Java Developer
+                                </a>
+                                <a href="https://gb.ru/go/PHz8aS" target="_blank" class="certificate-badge badge bg-info text-dark">
+                                    Python Основы
+                                </a>
+                                <a href="https://gb.ru/go/jIV-Vk" target="_blank" class="certificate-badge badge bg-info text-dark">
+                                    Python Разработка
+                                </a>
+                                <a href="https://gb.ru/go/jcA7Vx" target="_blank" class="certificate-badge badge bg-info text-dark">
+                                    Java ООП
+                                </a>
+                                <a href="https://gb.ru/go/~mQMj_" target="_blank" class="certificate-badge badge bg-info text-dark">
+                                    Linux
+                                </a>
+                                <a href="https://gb.ru/go/j97ddG" target="_blank" class="certificate-badge badge bg-info text-dark">
+                                    Базы данных
+                                </a>
+                            </div>
+                            <p class="small text-muted">Нажмите на бейдж для просмотра сертификата</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Skills -->
+                <section class="card shadow-sm mb-5" data-aos="fade-left" data-aos-delay="100">
+                    <div class="card-body">
+                        <h2 class="card-title h4 mb-4">
+                            <i class="bi bi-tools me-2 text-primary"></i>Технические навыки
+                        </h2>
+                        
+                        <div class="mb-3">
+                            <h6 class="fw-bold mb-2">Backend</h6>
+                            <div class="d-flex flex-wrap gap-1 mb-3">
+                                <span class="skill-badge">Python</span>
+                                <span class="skill-badge">FastAPI</span>
+                                <span class="skill-badge">Django</span>
+                                <span class="skill-badge">Flask</span>
+                                <span class="skill-badge">Java</span>
+                                <span class="skill-badge">Spring Boot</span>
+                                <span class="skill-badge">C#</span>
+                            </div>
+                            
+                            <h6 class="fw-bold mb-2">Базы данных</h6>
+                            <div class="d-flex flex-wrap gap-1 mb-3">
+                                <span class="skill-badge">PostgreSQL</span>
+                                <span class="skill-badge">MySQL</span>
+                                <span class="skill-badge">MongoDB</span>
+                                <span class="skill-badge">SQLAlchemy</span>
+                                <span class="skill-badge">Redis</span>
+                            </div>
+                            
+                            <h6 class="fw-bold mb-2">Frontend & GameDev</h6>
+                            <div class="d-flex flex-wrap gap-1 mb-3">
+                                <span class="skill-badge">HTML/CSS</span>
+                                <span class="skill-badge">JavaScript</span>
+                                <span class="skill-badge">Bootstrap</span>
+                                <span class="skill-badge">Unity</span>
+                                <span class="skill-badge">Construct 3</span>
+                                <span class="skill-badge">Roblox Studio</span>
+                            </div>
+                            
+                            <h6 class="fw-bold mb-2">Инструменты</h6>
+                            <div class="d-flex flex-wrap gap-1">
+                                <span class="skill-badge">Git</span>
+                                <span class="skill-badge">Docker</span>
+                                <span class="skill-badge">Linux</span>
+                                <span class="skill-badge">VS Code</span>
+                                <span class="skill-badge">Blender</span>
+                                <span class="skill-badge">Gimp</span>
+                                <span class="skill-badge">Inkscape</span>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-4">
+                            <h6 class="fw-bold mb-2">Языки</h6>
+                            <div class="d-flex flex-wrap gap-1">
+                                <span class="badge bg-primary">Русский (родной)</span>
+                                <span class="badge bg-primary">Английский (B2)</span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Achievements -->
+                <section class="card shadow-sm mb-5" data-aos="fade-left" data-aos-delay="150">
+                    <div class="card-body">
+                        <h2 class="card-title h4 mb-4">
+                            <i class="bi bi-trophy me-2 text-primary"></i>Преподавательский опыт
+                        </h2>
+                        
+                        <div class="achievements-list">
+                            <div class="achievement-item mb-3">
+                                <div class="d-flex">
+                                    <i class="bi bi-mortarboard-fill text-warning me-2"></i>
+                                    <div>
+                                        <strong>Роботенок</strong> (1.5 года)
+                                        <p class="small text-muted mb-1">Курсы: Lego WeDo 2.0, Scratch 3, Construct 3, JDevelop</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="achievement-item mb-3">
+                                <div class="d-flex">
+                                    <i class="bi bi-building text-info me-2"></i>
+                                    <div>
+                                        <strong>Академия Top</strong> (1+ год)
+                                        <p class="small text-muted mb-1">Курсы: 3D моделирование, Python3, LegoSpike, Веб-технологии</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="achievement-item mb-3">
+                                <div class="d-flex">
+                                    <i class="bi bi-book text-success me-2"></i>
+                                    <div>
+                                        <strong>Колледж Top</strong> (4 месяца)
+                                        <p class="small text-muted mb-1">Основы БД, Программные модули, Тестирование, Информатика</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="achievement-item">
+                                <div class="d-flex">
+                                    <i class="bi bi-code-slash text-primary me-2"></i>
+                                    <div>
+                                        <strong>Курсы для новичков</strong> (2+ месяца)
+                                        <p class="small text-muted mb-1">Основы Python и веб-технологий</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Soft Skills -->
+                <section class="card shadow-sm" data-aos="fade-left" data-aos-delay="200">
+                    <div class="card-body">
+                        <h2 class="card-title h4 mb-4">
+                            <i class="bi bi-people me-2 text-primary"></i>Soft Skills
+                        </h2>
+                        
+                        <div class="soft-skills">
+                            <div class="soft-skill-item mb-3">
+                                <div class="d-flex justify-content-between mb-1">
+                                    <span>Преподавание и менторинг</span>
+                                    <span class="text-muted">95%</span>
+                                </div>
+                                <div class="progress" style="height: 6px;">
+                                    <div class="progress-bar bg-success" style="width: 95%"></div>
+                                </div>
+                            </div>
+                            
+                            <div class="soft-skill-item mb-3">
+                                <div class="d-flex justify-content-between mb-1">
+                                    <span>Решение проблем</span>
+                                    <span class="text-muted">90%</span>
+                                </div>
+                                <div class="progress" style="height: 6px;">
+                                    <div class="progress-bar bg-info" style="width: 90%"></div>
+                                </div>
+                            </div>
+                            
+                            <div class="soft-skill-item mb-3">
+                                <div class="d-flex justify-content-between mb-1">
+                                    <span>Обучение и адаптация</span>
+                                    <span class="text-muted">98%</span>
+                                </div>
+                                <div class="progress" style="height: 6px;">
+                                    <div class="progress-bar bg-warning" style="width: 98%"></div>
+                                </div>
+                            </div>
+                            
+                            <div class="soft-skill-item">
+                                <div class="d-flex justify-content-between mb-1">
+                                    <span>Коммуникация</span>
+                                    <span class="text-muted">85%</span>
+                                </div>
+                                <div class="progress" style="height: 6px;">
+                                    <div class="progress-bar bg-primary" style="width: 85%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+
+        <!-- Photo Gallery Section -->
+        <section id="photo-gallery" class="photo-gallery-section mt-5" data-aos="fade-up">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h2 class="card-title h3 mb-4 text-center">
+                        <i class="bi bi-images me-2 text-primary"></i>Фото галерея проектов и работ
+                    </h2>
+                    <p class="text-center text-muted mb-4">Фотографии проектов, работ и достижений</p>
+                    
+                    <div class="photo-gallery">
+                        <!-- Placeholder для фото 1 -->
+                        <div class="photo-frame">
+                            <img src="./assets/images/2025-12-06_21-48-22.png" alt="Описание фото" class="img-fluid rounded">
+                        </div>
+                        
+                        <!-- Placeholder для фото 2 -->
+                        <div class="photo-frame">
+                            <img src="./assets/images/2025-12-06_21-50-59.png" alt="Описание фото" class="img-fluid rounded">
+                        </div>
+                        
+                        <!-- Placeholder для фото 3 -->
+                        <div class="photo-frame">
+                            <img src="./assets/images/2025-12-06_21-49-45.png" alt="Описание фото" class="img-fluid rounded">
+                        </div>
+                        
+                        <!-- Placeholder для фото 4 -->
+                        <div class="photo-frame">
+                            <img src="./assets/images/photo_2025-12-07_15-27-47.jpg" alt="Описание фото" class="img-fluid rounded">
+                        </div>
+                        
+                        <!-- Placeholder для фото 5 -->
+                        <div class="photo-frame">
+                            <img src="./assets/images/photo_2025-12-07_15-27-55.jpg" alt="Описание фото" class="img-fluid rounded">
+                        </div>
+                        
+                        <!-- Placeholder для фото 6 -->
+                        <div class="photo-frame">
+                            <img src="./assets/images/photo_2025-12-07_15-28-03.jpg" alt="Описание фото" class="img-fluid rounded">
+                        </div>
+
+                        <div class="photo-frame">
+                            <img src="./assets/images/photo_2025-12-07_15-28-08.jpg" alt="Описание фото" class="img-fluid rounded">
+                        </div>
+
+                        <div class="photo-frame">
+                            <img src="./assets/images/photo_2025-12-07_15-28-13.jpg" alt="Описание фото" class="img-fluid rounded">
+                        </div>
+
+                        <div class="photo-frame">
+                            <img src="./assets/images/photo_2025-12-07_15-28-16.jpg" alt="Описание фото" class="img-fluid rounded">
+                        </div>
+
+                        <div class="photo-frame">
+                            <img src="./assets/images/photo_2025-12-07_15-28-20.jpg" alt="Описание фото" class="img-fluid rounded">
+                        </div>
+
+                        <div class="photo-frame">
+                            <img src="./assets/images/photo_2025-12-07_15-28-24.jpg" alt="Описание фото" class="img-fluid rounded">
+                        </div>
+
+                        <div class="photo-frame">
+                            <img src="./assets/images/photo_2025-12-07_15-28-30.jpg" alt="Описание фото" class="img-fluid rounded">
+                        </div>
+
+                        <div class="photo-frame">
+                            <img src="./assets/images/photo_2025-12-07_15-28-33.jpg" alt="Описание фото" class="img-fluid rounded">
+                        </div>
+
+                        <div class="photo-frame">
+                            <img src="./assets/images/photo_2025-12-07_15-28-38.jpg" alt="Описание фото" class="img-fluid rounded">
+                        </div>
+
+                        <div class="photo-frame">
+                            <img src="./assets/images/photo_2025-12-07_15-28-41.jpg" alt="Описание фото" class="img-fluid rounded">
+                        </div>
+
+                        <div class="photo-frame">
+                            <img src="./assets/images/photo_2025-12-07_15-28-46.jpg" alt="Описание фото" class="img-fluid rounded">
+                        </div>
+
+                        <div class="photo-frame">
+                            <img src="./assets/images/photo_2025-12-07_15-28-50.jpg" alt="Описание фото" class="img-fluid rounded">
+                        </div>
+
+                        <div class="photo-frame">
+                            <img src="./assets/images/photo_2025-12-07_15-28-55.jpg" alt="Описание фото" class="img-fluid rounded">
+                        </div>
+
+                        <div class="photo-frame">
+                            <img src="./assets/images/photo_2025-12-07_15-28-58.jpg" alt="Описание фото" class="img-fluid rounded">
+                        </div>
+
+                        <div class="photo-frame">
+                            <img src="./assets/images/photo_2025-12-07_15-29-01.jpg" alt="Описание фото" class="img-fluid rounded">
+                        </div>
+
+                        <div class="photo-frame">
+                            <img src="./assets/images/photo_2025-12-07_15-29-05.jpg" alt="Описание фото" class="img-fluid rounded">
+                        </div>
+
+                        <div class="photo-frame">
+                            <img src="./assets/images/photo_2025-12-07_15-29-13.jpg" alt="Описание фото" class="img-fluid rounded">
+                        </div>
+
+                        <div class="photo-frame">
+                            <img src="./assets/images/photo_2025-12-07_15-29-15.jpg" alt="Описание фото" class="img-fluid rounded">
+                        </div>
+
+                        <div class="photo-frame">
+                            <img src="./assets/images/photo_2025-12-07_15-29-08.jpg" alt="Описание фото" class="img-fluid rounded">
+                        </div>
+
+                        <div class="photo-frame">
+                            <img src="./assets/images/photo_2025-12-07_15-29-20.jpg" alt="Описание фото" class="img-fluid rounded">
+                        </div>
+
+                        <div class="photo-frame">
+                            <img src="./assets/images/photo_2025-12-07_15-29-18.jpg" alt="Описание фото" class="img-fluid rounded">
+                        </div>
+
+                        <div class="photo-frame">
+                            <img src="./assets/images/photo_2025-12-07_15-38-55.jpg" alt="Описание фото" class="img-fluid rounded">
+                        </div>
+
+                    </div>
+                    
+                    <div class="text-center mt-4">
+                        <p class="text-muted small">
+                            <i class="bi bi-info-circle me-1"></i>
+                            На фото моя работа: Летний лагерь, Академия, Роботенок - 2024
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="mt-5 pt-4 border-top">
+            <div class="row align-items-center">
+                <div class="col-md-6 mb-3 mb-md-0">
+                    <p class="text-muted small mb-0">
+                        <i class="bi bi-c-circle me-1"></i>2024-2025 Валеев Сергей Владимирович (GameDeva)
+                    </p>
+                    <p class="text-muted small mb-0">
+                        <i class="bi bi-calendar me-1"></i>Обновлено: Декабрь 2025
+                    </p>
+                </div>
+                
+                <div class="col-md-6 text-md-end">
+                    <div class="d-flex justify-content-center justify-content-md-end gap-3">
+                        <a href="https://github.com/Gabryelf" class="text-muted" target="_blank" title="GitHub">
+                            <i class="bi bi-github fs-5"></i>
+                        </a>
+                        <a href="https://t.me/Gabryelf" class="text-muted" target="_blank" title="Telegram">
+                            <i class="bi bi-telegram fs-5"></i>
+                        </a>
+                        <a href="mailto:gabryelf@yandex.ru" class="text-muted" title="Email">
+                            <i class="bi bi-envelope fs-5"></i>
+                        </a>
+                        <a href="#photo-gallery" class="text-muted" title="Фото галерея">
+                            <i class="bi bi-images fs-5"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+    <script>
+        // Initialize AOS
+        AOS.init({
+            duration: 800,
+            once: true,
+            offset: 100
+        });
+
+        // Theme Toggle
+        const themeToggle = document.getElementById('themeToggle');
+        const html = document.documentElement;
+        
+        themeToggle.addEventListener('click', () => {
+            if (html.getAttribute('data-bs-theme') === 'dark') {
+                html.setAttribute('data-bs-theme', 'light');
+                themeToggle.innerHTML = '<i class="bi bi-moon"></i>';
+                themeToggle.title = 'Включить темную тему';
+            } else {
+                html.setAttribute('data-bs-theme', 'dark');
+                themeToggle.innerHTML = '<i class="bi bi-sun"></i>';
+                themeToggle.title = 'Включить светлую тему';
+            }
+        });
+
+        // Print functionality
+        document.addEventListener('keydown', (e) => {
+            if (e.ctrlKey && e.key === 'p') {
+                e.preventDefault();
+                window.print();
+            }
+        });
+
+        // Celebration on load
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                confetti({
+                    particleCount: 30,
+                    spread: 60,
+                    origin: { y: 0.6 }
+                });
+            }, 1000);
+        });
+
+        // Add active class to gallery button when scrolling
+        window.addEventListener('scroll', () => {
+            const gallerySection = document.getElementById('photo-gallery');
+            const galleryBtn = document.querySelector('.jump-to-photos a');
+            
+            if (gallerySection) {
+                const rect = gallerySection.getBoundingClientRect();
+                if (rect.top <= 100 && rect.bottom >= 100) {
+                    galleryBtn.classList.add('btn-primary');
+                    galleryBtn.classList.remove('btn-success');
+                } else {
+                    galleryBtn.classList.add('btn-success');
+                    galleryBtn.classList.remove('btn-primary');
+                }
+            }
+        });
+    </script>
+</body>
+</html>
