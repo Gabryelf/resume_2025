@@ -54,7 +54,8 @@
             .theme-toggle,
             .btn,
             .photo-gallery-section,
-            .jump-to-photos {
+            .jump-to-photos,
+            #diplomaZoomModal {
                 display: none !important;
             }
             
@@ -329,6 +330,76 @@
         html {
             scroll-behavior: smooth;
         }
+
+        /* Diploma Container Styles */
+        .diploma-container {
+            cursor: pointer;
+            transition: all 0.3s ease;
+            overflow: hidden;
+            border-radius: 12px;
+            height: 200px;
+            position: relative;
+        }
+
+        .diploma-container:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+
+        .diploma-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .diploma-container:hover img {
+            transform: scale(1.05);
+        }
+
+        .diploma-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.7);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            color: white;
+            text-align: center;
+            padding: 1rem;
+            border-radius: 12px;
+        }
+
+        .diploma-container:hover .diploma-overlay {
+            opacity: 1;
+        }
+
+        /* Zoom Modal Styles */
+        .diploma-zoom-container {
+            max-height: 70vh;
+            overflow: auto;
+            cursor: grab;
+            touch-action: none;
+        }
+
+        .diploma-zoom-container:active {
+            cursor: grabbing;
+        }
+
+        #zoomed-image {
+            transition: transform 0.3s ease;
+            max-width: 100%;
+        }
+
+        .btn-close-white {
+            filter: invert(1) grayscale(100%) brightness(200%);
+        }
     </style>
 </head>
 <body>
@@ -353,7 +424,6 @@
             <div class="col-md-3 text-center mb-4 mb-md-0">
                 <div class="avatar-container">
                     <div class="avatar-placeholder">
-                        
                         <img src="./assets/favicon/icon.jpg" alt="avatar-foto" width="250" height="300">
                     </div>
                 </div>
@@ -742,8 +812,36 @@
                     </div>
                 </section>
 
+                <!-- Diploma Container -->
+                <section class="card shadow-sm mb-5" data-aos="fade-left" data-aos-delay="200">
+                    <div class="card-body">
+                        <h2 class="card-title h4 mb-4">
+                            <i class="bi bi-award me-2 text-primary"></i>Диплом и сертификаты
+                        </h2>
+                        
+                        <div class="diploma-container" onclick="openZoomModal('./assets/favicon/diploma.jpg', 'Диплом о высшем образовании')">
+                            <img src="./assets/favicon/diploma.jpg" alt="Диплом о высшем образовании">
+                            <div class="diploma-overlay">
+                                <i class="bi bi-zoom-in fs-1 mb-2"></i>
+                                <p class="mb-1 fw-bold">Нажмите для увеличения</p>
+                                <p class="small">Диплом о высшем образовании</p>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-3 text-center">
+                            <p class="small text-muted">
+                                <i class="bi bi-info-circle me-1"></i>
+                                Нажмите на фото для детального просмотра
+                            </p>
+                            <button class="btn btn-sm btn-outline-primary" onclick="openZoomModal('./assets/favicon/diploma.jpg', 'Диплом о высшем образовании')">
+                                <i class="bi bi-zoom-in me-1"></i>Просмотреть диплом
+                            </button>
+                        </div>
+                    </div>
+                </section>
+
                 <!-- Soft Skills -->
-                <section class="card shadow-sm" data-aos="fade-left" data-aos-delay="200">
+                <section class="card shadow-sm" data-aos="fade-left" data-aos-delay="250">
                     <div class="card-body">
                         <h2 class="card-title h4 mb-4">
                             <i class="bi bi-people me-2 text-primary"></i>Soft Skills
@@ -930,7 +1028,7 @@
                 </div>
             </div>
         </section>
-
+        
         <!-- Footer -->
         <footer class="mt-5 pt-4 border-top">
             <div class="row align-items-center">
@@ -961,6 +1059,34 @@
                 </div>
             </div>
         </footer>
+    </div>
+
+    <!-- Zoom Modal for Diploma -->
+    <div class="modal fade" id="diplomaZoomModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-xl">
+            <div class="modal-content bg-transparent border-0">
+                <div class="modal-header border-0">
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body text-center">
+                    <div id="zoom-container" class="diploma-zoom-container">
+                        <img id="zoomed-image" src="" alt="" class="img-fluid rounded shadow-lg">
+                    </div>
+                    <div id="image-caption" class="text-white mt-3 fs-5"></div>
+                </div>
+                <div class="modal-footer border-0 justify-content-center">
+                    <button class="btn btn-outline-light me-2" onclick="zoomIn()">
+                        <i class="bi bi-zoom-in"></i> Увеличить
+                    </button>
+                    <button class="btn btn-outline-light me-2" onclick="zoomOut()">
+                        <i class="bi bi-zoom-out"></i> Уменьшить
+                    </button>
+                    <button class="btn btn-outline-light" onclick="resetZoom()">
+                        <i class="bi bi-arrow-clockwise"></i> Сбросить
+                    </button>
+                </div>
+            </div>
+        </div>
     </div>
 
     <!-- Scripts -->
@@ -1024,6 +1150,127 @@
                     galleryBtn.classList.add('btn-success');
                     galleryBtn.classList.remove('btn-primary');
                 }
+            }
+        });
+
+        // Diploma Zoom Modal Functions
+        let currentScale = 1;
+        let isDragging = false;
+        let startX, startY, scrollLeft, scrollTop;
+        let zoomContainer, zoomedImage;
+        
+        function openZoomModal(imageSrc, caption) {
+            const modal = new bootstrap.Modal(document.getElementById('diplomaZoomModal'));
+            zoomedImage = document.getElementById('zoomed-image');
+            zoomContainer = document.getElementById('zoom-container');
+            
+            zoomedImage.src = imageSrc;
+            document.getElementById('image-caption').textContent = caption;
+            currentScale = 1;
+            zoomedImage.style.transform = `scale(${currentScale})`;
+            
+            // Reset container scroll
+            zoomContainer.scrollLeft = 0;
+            zoomContainer.scrollTop = 0;
+            
+            modal.show();
+        }
+        
+        function zoomIn() {
+            currentScale += 0.2;
+            zoomedImage.style.transform = `scale(${currentScale})`;
+        }
+        
+        function zoomOut() {
+            if (currentScale > 0.4) {
+                currentScale -= 0.2;
+                zoomedImage.style.transform = `scale(${currentScale})`;
+            }
+        }
+        
+        function resetZoom() {
+            currentScale = 1;
+            zoomedImage.style.transform = `scale(${currentScale})`;
+            zoomContainer.scrollLeft = 0;
+            zoomContainer.scrollTop = 0;
+        }
+        
+        // Drag functionality for zoomed image
+        document.addEventListener('DOMContentLoaded', function() {
+            const modal = document.getElementById('diplomaZoomModal');
+            
+            modal.addEventListener('shown.bs.modal', function() {
+                zoomContainer = document.getElementById('zoom-container');
+                zoomContainer.addEventListener('mousedown', startDrag);
+                zoomContainer.addEventListener('touchstart', startDragTouch);
+            });
+            
+            modal.addEventListener('hidden.bs.modal', function() {
+                resetZoom();
+            });
+        });
+        
+        function startDrag(e) {
+            isDragging = true;
+            startX = e.pageX - zoomContainer.offsetLeft;
+            startY = e.pageY - zoomContainer.offsetTop;
+            scrollLeft = zoomContainer.scrollLeft;
+            scrollTop = zoomContainer.scrollTop;
+            
+            document.addEventListener('mousemove', drag);
+            document.addEventListener('mouseup', stopDrag);
+        }
+        
+        function startDragTouch(e) {
+            isDragging = true;
+            const touch = e.touches[0];
+            startX = touch.pageX - zoomContainer.offsetLeft;
+            startY = touch.pageY - zoomContainer.offsetTop;
+            scrollLeft = zoomContainer.scrollLeft;
+            scrollTop = zoomContainer.scrollTop;
+            
+            document.addEventListener('touchmove', dragTouch);
+            document.addEventListener('touchend', stopDrag);
+        }
+        
+        function drag(e) {
+            if (!isDragging) return;
+            e.preventDefault();
+            const x = e.pageX - zoomContainer.offsetLeft;
+            const y = e.pageY - zoomContainer.offsetTop;
+            const walkX = (x - startX) * 2;
+            const walkY = (y - startY) * 2;
+            
+            zoomContainer.scrollLeft = scrollLeft - walkX;
+            zoomContainer.scrollTop = scrollTop - walkY;
+        }
+        
+        function dragTouch(e) {
+            if (!isDragging) return;
+            e.preventDefault();
+            const touch = e.touches[0];
+            const x = touch.pageX - zoomContainer.offsetLeft;
+            const y = touch.pageY - zoomContainer.offsetTop;
+            const walkX = (x - startX) * 2;
+            const walkY = (y - startY) * 2;
+            
+            zoomContainer.scrollLeft = scrollLeft - walkX;
+            zoomContainer.scrollTop = scrollTop - walkY;
+        }
+        
+        function stopDrag() {
+            isDragging = false;
+            document.removeEventListener('mousemove', drag);
+            document.removeEventListener('touchmove', dragTouch);
+            document.removeEventListener('mouseup', stopDrag);
+            document.removeEventListener('touchend', stopDrag);
+        }
+        
+        // Close modal with Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                const modal = bootstrap.Modal.getInstance(document.getElementById('diplomaZoomModal'));
+                if (modal) modal.hide();
             }
         });
     </script>
